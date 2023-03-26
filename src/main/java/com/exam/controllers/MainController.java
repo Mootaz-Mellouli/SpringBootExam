@@ -1,6 +1,7 @@
 package com.exam.controllers;
 
 import com.exam.entities.Project;
+import com.exam.entities.Sprint;
 import com.exam.entities.User;
 import com.exam.services.IMainService;
 import lombok.RequiredArgsConstructor;
@@ -33,5 +34,15 @@ public class MainController {
     @GetMapping("/projectsAlive")
     public List<Project> getAllCurrentProject() {
         return mainService.getAllCurrentProject();
+    }
+
+    @GetMapping("/projectsScrumMaster/{fName}/{lName}")
+    public List<Project> getProjectsByScrumMaster(@PathVariable String fName,@PathVariable String lName) {
+        return mainService.getProjectsByScrumMaster(fName, lName);
+    }
+
+    @PostMapping("/addAndAssignSprint/{idProject}")
+    public void addSprintAndAssignToProject(@RequestBody Sprint sprint,@PathVariable int idProject) {
+        mainService.addSprintAndAssignToProject(sprint, idProject);
     }
 }
